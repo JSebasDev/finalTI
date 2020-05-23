@@ -69,21 +69,21 @@ jobs:
             - v1-dependencies-
       - add_ssh_keys:
           fingerprints:
-            - "a6:92:78:56:74:59:3b:f3:7f:a7:69:ed:7f:99:af:29"
+            - "dd:22:07:4b:15:77:2d:16:bc:81:f9:ed:39:57:f6:e4"
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
             cd ./Aplicacion1
             yarn run build
-            ssh -o StrictHostKeyChecking=no ubuntu@3.223.125.157 "mkdir -p App1"
-            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.223.125.157:~/App1
+            ssh -o StrictHostKeyChecking=no ubuntu@3.231.158.234 "mkdir -p App1"
+            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.231.158.234:~/App1
       - run: 
          name: "Deploy Aplicacion 2"
          command: |
             cd ./Aplicacion2
             yarn run build
-            ssh -o StrictHostKeyChecking=no ubuntu@3.223.125.157 "mkdir -p App2"
-            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.223.125.157:~/App2
+            ssh -o StrictHostKeyChecking=no ubuntu@3.231.158.234 "mkdir -p App2"
+            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.231.158.234:~/App2
       - save_cache:
           paths:
             - node_modules
