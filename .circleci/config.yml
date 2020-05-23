@@ -69,7 +69,7 @@ jobs:
             - v1-dependencies-
       - add_ssh_keys:
           fingerprints:
-            - ""
+            - "a6:92:78:56:74:59:3b:f3:7f:a7:69:ed:7f:99:af:29"
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
@@ -102,7 +102,7 @@ jobs:
             - v1-dependencies-
       - add_ssh_keys:
           fingerprints:
-            - ""
+            - "f4:1c:cf:8e:31:a2:93:4a:4a:6d:58:18:f9:5c:19:64"
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
