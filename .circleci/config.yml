@@ -10,20 +10,27 @@ jobs:
 
     steps:
       - checkout
-
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
-         cd ./Aplicacion1
-         yarn install
+            cd ./Aplicacion1
+            yarn install
       - run: 
          name: "Deploy Aplicacion 2"
          command: |
-         cd ./Aplicacion2
-         yarn install
+            cd ./Aplicacion2
+            yarn install
 
-
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
   test:
     docker:
       - image: circleci/node:latest
@@ -40,13 +47,13 @@ jobs:
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
-         cd ./Aplicacion1
-         yarn run test
+            cd ./Aplicacion1
+            yarn run test
       - run: 
          name: "Deploy Aplicacion 2"
          command: |
-         cd ./Aplicacion2
-         yarn run test
+            cd ./Aplicacion2
+            yarn run test
   deployDevelopment:
     docker:
       - image: circleci/node:latest
@@ -66,17 +73,17 @@ jobs:
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
-         cd./Aplicacion1
-         yarn run build
-         ssh -o StrictHostKeyChecking=no ubuntu@3.223.125.157 "mkdir -p App1"
-         scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.223.125.157:~/App1
+            cd ./Aplicacion1
+            yarn run build
+            ssh -o StrictHostKeyChecking=no ubuntu@3.223.125.157 "mkdir -p App1"
+            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.223.125.157:~/App1
       -run: 
          name: "Deploy Aplicacion 2"
          command: |
-         cd./Aplicacion2
-         yarn run build
-         ssh -o StrictHostKeyChecking=no ubuntu@3.223.125.157 "mkdir -p App2"
-         scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.223.125.157:~/App2
+            cd ./Aplicacion2
+            yarn run build
+            ssh -o StrictHostKeyChecking=no ubuntu@3.223.125.157 "mkdir -p App2"
+            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@3.223.125.157:~/App2
       - save_cache:
           paths:
             - node_modules
@@ -99,17 +106,17 @@ jobs:
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
-         cd ./Aplicacion1
-         yarn run build
-         ssh -o StrictHostKeyChecking=no ubuntu@34.201.47.241 "mkdir -p App1"
-         scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@34.201.47.241:~/App1
+            cd ./Aplicacion1
+            yarn run build
+            ssh -o StrictHostKeyChecking=no ubuntu@34.201.47.241 "mkdir -p App1"
+            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@34.201.47.241:~/App1
       -run: 
          name: "Deploy Aplicacion 2"
          command: |
-         cd ./Aplicacion2
-         yarn run build
-         ssh -o StrictHostKeyChecking=no ubuntu@34.201.47.241 "mkdir -p App2"
-         scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@34.201.47.241:~/App2
+            cd ./Aplicacion2
+            yarn run build
+            ssh -o StrictHostKeyChecking=no ubuntu@34.201.47.241 "mkdir -p App2"
+            scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@34.201.47.241:~/App2
       
       - save_cache:
           paths:
