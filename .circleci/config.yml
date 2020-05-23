@@ -19,12 +19,12 @@ jobs:
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
-         cd./Aplicacion1
+         cd ./Aplicacion1
          yarn install
       - run: 
          name: "Deploy Aplicacion 2"
          command: |
-         cd./Aplicacion2
+         cd ./Aplicacion2
          yarn install
 
       - save_cache:
@@ -47,12 +47,12 @@ jobs:
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
-         cd./Aplicacion1
+         cd ./Aplicacion1
          yarn run test
       - run: 
          name: "Deploy Aplicacion 2"
          command: |
-         cd./Aplicacion2
+         cd ./Aplicacion2
          yarn run test
   deployDevelopment:
     docker:
@@ -106,14 +106,14 @@ jobs:
       - run: 
          name: "Deploy Aplicacion 1"
          command: |
-         cd./Aplicacion1
+         cd ./Aplicacion1
          yarn run build
          ssh -o StrictHostKeyChecking=no ubuntu@34.201.47.241 "mkdir -p App1"
          scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@34.201.47.241:~/App1
       -run: 
          name: "Deploy Aplicacion 2"
          command: |
-         cd./Aplicacion2
+         cd ./Aplicacion2
          yarn run build
          ssh -o StrictHostKeyChecking=no ubuntu@34.201.47.241 "mkdir -p App2"
          scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@34.201.47.241:~/App2
